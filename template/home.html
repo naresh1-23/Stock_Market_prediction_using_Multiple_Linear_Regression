@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Result Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            text-align: center;
+        }
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #218838;
+        }
+        #result-container {
+            display: block;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #28a745;
+            border-radius: 8px;
+            background-color: #e9f7ef;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Enter Values</h2>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <label for="open">Open:</label>
+                <input type="number" id="open" name="open" required>
+                
+                <label for="high">High:</label>
+                <input type="number" id="high" name="high" required>
+                
+                <label for="low">Low:</label>
+                <input type="number" id="low" name="low" required>
+                <label for="Vol">Vol:</label>
+                <input type="number" id="low" name="Vol" required>
+                
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    {% if data.result %}
+    <div id="result-container">
+        <h3>Submitted Values</h3>
+        <p>
+            <strong>Open:</strong> {{ data.open }} <br>
+            <strong>High:</strong> {{ data.high }} <br>
+            <strong>Low:</strong> {{ data.low }} <br>
+            <strong>Vol:</strong> {{ data.vol }} <br>
+            <strong>Close:</strong> {{ data.result }} <br>
+        </p>
+    </div>
+    {% endif %}
+</body>
+</html>
